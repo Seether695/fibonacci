@@ -3,22 +3,22 @@ services:
   - docker
 
 before_install:
-  - docker build -t alejandro/docker-react-test -f ./client/Dockerfile.dev ./client
+  - docker build -t alejandroconversica/docker-react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true alejandro/docker-react-test npm test
+  - docker run -e CI=true alejandroconversica/docker-react-test npm test
 
 after_success:
-  - docker build -t alejandro/multi-client ./client
-  - docker build -t alejandro/multi-nginx ./nginx
-  - docker build -t alejandro/multi-server ./server
-  - docker build -t alejandro/multi-worker ./worker
+  - docker build -t alejandroconversica/multi-client ./client
+  - docker build -t alejandroconversica/multi-nginx ./nginx
+  - docker build -t alejandroconversica/multi-server ./server
+  - docker build -t alejandroconversica/multi-worker ./worker
   #Login to docker CLI
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   #Take those images and push them to docker hub
-  - docker push alejandro/multi-client
-  - docker push alejandro/multi-nginx 
-  - docker push alejandro/multi-server
-  - docker push alejandro/multi-worker
+  - docker push alejandroconversica/multi-client
+  - docker push alejandroconversica/multi-nginx 
+  - docker push alejandroconversica/multi-server
+  - docker push alejandroconversica/multi-worker
 
 language: generic
